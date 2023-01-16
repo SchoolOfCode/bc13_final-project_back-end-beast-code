@@ -1,24 +1,23 @@
 import express from 'express';
-import mongoose from 'mongoose';
 import * as dotenv from 'dotenv';
+import router from './routes/routes.js';
+import { MongoClient } from "mongodb";
+
 dotenv.config()
-const MONGO_STRING = process.env.DATABASE_URL
-const PORT = process.env.PORT
 
-mongoose.connect(MONGO_STRING);
-const database = mongoose.connection
+const uri = process.env.DATABASE_URL;
+const client = new MongoClient(uri);
+const database = client.db("beastcodeDB");
+const bardata = database.collection("bardata")
 
-database.on('error', (error) => {
-    console.log(error)
-})
-
-database.once('connected', () => {
-    console.log('Database Connected');
-})
+const PORT = process.env.PORT | 3000;
 
 const app = express();
 app.use(express.json());
+app.use('/api/router', router)
 
-app.listen(3000, () => {
-    console.log(`Server Started at ${3000}`)
+app.listen(PORT, () => {
+    console.log(`Server Started on Port ${3000}`)
 })
+
+export default bardata;
