@@ -3,12 +3,18 @@ import getDataByCoords from "../models/model.js";
 
 const router = express.Router();
 
+
 //get by coordinates
-router.get("/", async (req, res) => {
+router.get("/:coords", async (req, res) => {
   try {
     console.log("made it to routes");
-    const bars = await getDataByCoords(req.body);
-    console.log(bars);
+    const inputCoords = req.params.coords
+    //coords comes in as a string so we split it at the comma to get an array of 2 strings
+    const twoStrings = inputCoords.split(',')
+    //convert each string coordinate in the array into a number coordinate
+    const coordsArray = [+twoStrings[0], +twoStrings[1]]
+    //pass array of 2 numbers into model
+    const bars = await getDataByCoords(coordsArray);
     res.send({ success: true, payload: bars });
   } catch (error) {
     res.status(500).json({ message: error.message });

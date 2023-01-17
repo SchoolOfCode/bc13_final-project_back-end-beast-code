@@ -1,11 +1,11 @@
 import request from "supertest";
 import { app } from "../app.js";
 import { expect, test } from "@jest/globals";
-//import { bardata } from "../app.js";
 
 describe("GET api/router", function () {
   it(" responds with bar data within a 20km radius", async function () {
-    const response = await request(app).get("/api/router");
+    const response = await request(app).get("/api/router/-2.244644,53.483959");
+    console.log(response)
     expect(response.status).toEqual(200);
     expect(response.body).toStrictEqual({
       success: true,
