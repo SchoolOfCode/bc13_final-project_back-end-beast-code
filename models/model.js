@@ -1,7 +1,7 @@
-import bardata from "../app.js";
+import {bardata} from "../app.js";
 
 export default async function getDataByCoords(arrayCoords) {
-    console.log(arrayCoords)
+    console.log("made it to models")
     const data = await bardata.aggregate([{
           '$geoNear': {
             'near': {
