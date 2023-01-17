@@ -1,6 +1,6 @@
 import {bardata} from "../app.js";
 
-export default async function getDataByCoords(arrayCoords) {
+export default async function getDataByCoords(arrayCoords, filterQuery) {
     console.log("made it to models")
     const data = await bardata.aggregate([{
           '$geoNear': {
@@ -10,7 +10,9 @@ export default async function getDataByCoords(arrayCoords) {
             }, 
             'distanceField': 'dist.calculated', 
             'maxDistance': 20000, 
-            'query': {}, 
+            'query': {
+              filterQuery
+            }, 
             'spherical': true
           }
     }]);
