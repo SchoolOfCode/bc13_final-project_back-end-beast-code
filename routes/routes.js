@@ -13,9 +13,7 @@ router.get("/:coords", async (req, res) => {
     const twoStrings = inputCoords.split(',')
     //convert each string coordinate in the array into a number coordinate
     const coordsArray = [+twoStrings[0], +twoStrings[1]]
-    const filterQuery = req.body.query
-    filterQuery.split(';')
-    console.log(typeof(filterQuery))
+    const filterQuery = req.body
     //pass array of 2 numbers into model
     const bars = await getDataByCoords(coordsArray, filterQuery);
     res.send({ success: true, payload: bars });
