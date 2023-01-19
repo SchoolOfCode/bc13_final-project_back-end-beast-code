@@ -1,5 +1,6 @@
 import { bardata } from "../app.js";
 
+/** Function to get all data within 20000 metres of the coordinates supplied the user */
 export async function getDataByCoords(arrayCoords) {
   const data = await bardata.aggregate([{
     '$geoNear': {
@@ -17,6 +18,7 @@ export async function getDataByCoords(arrayCoords) {
   return ans;
 };
 
+/** Function to get all data that matches the search query made by the user within 20000 metres of coords */
 export async function getFilteredData(arrayCoords, filterQueryObject) {
   const filterQuery = filterQueryObject.queryFilters
   //Builds the query object
