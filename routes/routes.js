@@ -1,8 +1,16 @@
 import express from "express";
-import {getDataByCoords, getFilteredData} from "../models/model.js";
+import {getDataByCoords, getFilteredData, getAll} from "../models/model.js";
 
 const router = express.Router();
 
+router.get("/", async (req, res) => {
+  try {
+    const bars = await getAll();
+    res.send({ success: true, payload: bars });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+})
 
 //get by coordinates
 router.get("/:coords", async (req, res) => {
