@@ -1,5 +1,11 @@
 import { bardata } from "../app.js";
 
+export async function getAll(){
+  const data = await bardata.find({}).toArray();
+    console.log(data);
+    return(data);
+};
+
 /** Function to get all data within 20000 metres of the coordinates supplied the user */
 export async function getDataByCoords(arrayCoords) {
   const data = await bardata.aggregate([{
