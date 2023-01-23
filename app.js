@@ -7,7 +7,7 @@ import cors from 'cors';
 dotenv.config()
 
 const uri = process.env.DATABASE_URL;
-const client = new MongoClient(uri);
+export const client = new MongoClient(uri);
 const database = client.db("beastcodeDB");
 export const bardata = database.collection("bardata")
 
