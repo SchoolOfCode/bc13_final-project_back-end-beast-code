@@ -3,7 +3,7 @@ import { ObjectId } from "bson";
 
 export async function getAll() {
   const data = await bardata.find({}).toArray();
-  console.log(data);
+  // console.log(data);
   return data;
 }
 
@@ -40,6 +40,7 @@ export async function getDataByCoords(arrayCoords) {
 /** Function to get all data that matches the search query made by the user within 20000 metres of coords */
 export async function getFilteredData(arrayCoords, filterQueryObject) {
   const filterQuery = filterQueryObject.queryFilters;
+  console.log(filterQuery)
   //Builds the query object
   let queryObj = {};
   for (let i = 0; i < filterQuery.length; i++) {
